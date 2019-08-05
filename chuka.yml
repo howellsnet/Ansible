@@ -1,0 +1,20 @@
+
+---
+- name: Httpd Play
+  hosts: webservers
+  remote_user: ansible
+  become: yes
+
+  vars:
+    assets_dir: /var/www/html
+
+  tasks:
+  - name: ensure Httpd is installed
+    yum: name=httpd state=present
+  - name: ensure directory exists
+    file: path={{ assets_dir }} state=directory
+  - name: start Httpd
+    service: name=httpd state=started enabled=yes
+  - name: copy index file
+    copy: src=/var/lib/jenkins/workspace/test2/index.html dest={{ assets_dir }} mode=0755
+    become: yes
