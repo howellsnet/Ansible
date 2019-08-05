@@ -1,2 +1,2 @@
 # Ansible
-Ansible playbook for Java
+Ansible playbook project
